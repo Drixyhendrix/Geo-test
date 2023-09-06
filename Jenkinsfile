@@ -22,7 +22,11 @@
     }
    stage('upload artifact'){
         steps{
-            sh 'curl --upload-file target/bioMedical-0.0.2-SNAPSHOT.jar -u admin:devops -v http://198.58.119.40:8081/repository/hendrix-maven/'
+            nexusArtifactUploader artifacts: [[artifactId: 'bioMmedical', 
+            classifier: '', file: 'target/bioMedical-0.0.2-SNAPSHOT.jar', type: 'jar']],
+             credentialsId: 'a363be51-42c8-4e49-87b8-20ba28e4f98d', 
+            groupId: 'qa', nexusUrl: '198.58.119.40:8081',
+             nexusVersion: 'nexus3', protocol: 'http', repository: 'hendrix-maven', version: '002'
         }
     }
 
